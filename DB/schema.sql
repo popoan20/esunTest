@@ -52,6 +52,7 @@ INSERT INTO Employee (EMP_ID, NAME, EMAIL, FLOOR_SEAT_SEQ) VALUES
 ('10015', '國強', 'guoqiang15@esunbank.com', 16),
 ('10016', '玉珍', 'yuzhen16@esunbank.com', NULL)
 ON DUPLICATE KEY UPDATE NAME = VALUES(NAME), EMAIL = VALUES(EMAIL), FLOOR_SEAT_SEQ = VALUES(FLOOR_SEAT_SEQ);
+<<<<<<< .merge_file_U1RgHP
 
 DELIMITER //
 
@@ -90,6 +91,8 @@ BEGIN
     SET floor_seat_seq = in_floor_seat_seq
     WHERE emp_id = in_emp_id;
 END //
+=======
+>>>>>>> .merge_file_4vU9A5
 
 CREATE OR REPLACE PROCEDURE RemoveSeatAssignment(
     IN in_empId VARCHAR(5)
