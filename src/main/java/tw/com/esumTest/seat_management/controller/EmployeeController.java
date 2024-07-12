@@ -49,11 +49,37 @@ public class EmployeeController {
 	}
 
 	private void validateEmployeeRequest(EmployeeRequest request) {
-		
+		if (request == null) {
+	        throw new IllegalArgumentException("EmployeeRequest為空");
+	    }
+	    
+	    // 驗證員工 ID 是否有效
+	    String empId = request.getEmpId();
+	    if (empId == null || empId.trim().isEmpty()) {
+	        throw new IllegalArgumentException("EmpId為空");
+	    }
+	    
+	    // 驗證座位 ID 是否有效
+	    Integer floorSeatSeq = request.getFloorSeatSeq();
+	    if (floorSeatSeq == null || floorSeatSeq <= 0) {
+	        throw new IllegalArgumentException("FloorSeatSeq為空");
+	    }
 	}
 
 	private void validateEmpId(String empId) {
-		
+		if (empId == null || empId.trim().isEmpty()) {
+	        throw new IllegalArgumentException("ID不得為空");
+	    }
+	    
+	    // 確保 empId 符合特定的格式
+	    if (empId.length() == 5) { // 假設 ID 長度應等於 5
+	        throw new IllegalArgumentException("ID應等於5");
+	    }
+	    
+	    // 確保 empId 只包含有效的字符
+	    if (!empId.matches("^[a-zA-Z0-9]+$")) { // 只允許字母和數字
+	        throw new IllegalArgumentException("ID僅准輸入英文及數字");
+	    }
 	}
 
 }
