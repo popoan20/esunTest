@@ -7,22 +7,26 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import tw.com.esumTest.seat_management.entity.Employee;
+import tw.com.esumTest.seat_management.entity.EmployeeRequest;
+import tw.com.esumTest.seat_management.entity.Seatingchart;
 import tw.com.esumTest.seat_management.repository.EmployeeRepository;
+import tw.com.esumTest.seat_management.repository.SeatingChartRepository;
 
 @Service
 public class EmployeeService {
 	@Autowired
 	private EmployeeRepository employeeRepository;
+	
+	@Autowired
+	private SeatingChartRepository seatingChartRepository;
 
 	@Transactional
-	public void assignSeat(Employee employee) {
-		// 清除該員工原有的座位
-		Employee existingEmployee = employeeRepository.findById(employee.getEmpId()).orElse(null);
-		if (existingEmployee != null && existingEmployee.getFloorSeatSeq() != null) {
-			existingEmployee.setFloorSeatSeq(null);
-			employeeRepository.save(existingEmployee);
-		}
-		// 分配新座位
+	public void assignSeat(EmployeeRequest request) {
+		Employee employee = employeeRepository.findById(request.getEmpId())
+		.orElseThrow( ()-> new RuntimeException("未查找到該員工"));
+		Seatingchart seatingchart  = seatingChartRepository.findById(request.getFloorSeatSeq())
+				.orElseThrow(() -> new RuntimeException("未查找到該座位"));
+		employee.setFloorSeatSeq(seatingchart);
 		employeeRepository.save(employee);
 	}
 

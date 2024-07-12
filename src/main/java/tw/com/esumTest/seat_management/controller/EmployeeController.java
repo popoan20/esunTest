@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import tw.com.esumTest.seat_management.entity.Employee;
+import tw.com.esumTest.seat_management.entity.EmployeeRequest;
 import tw.com.esumTest.seat_management.service.EmployeeService;
 
 @RestController
@@ -26,8 +27,10 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public void assignSeat(@RequestBody Employee employee) {
-        employeeService.assignSeat(employee);
+    public void assignSeat(@RequestBody EmployeeRequest[] requests) {
+    	for (EmployeeRequest request : requests) {
+    		employeeService.assignSeat(request);
+    	}
     }
 
     @PutMapping("/{empId}")

@@ -1,7 +1,6 @@
 package tw.com.esumTest.seat_management.entity;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.io.Serializable;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,30 +9,15 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Seatingchart")
-public class Seatingchart{
+public class Seatingchart implements Serializable{
 
     @Id
     @Column(name = "FLOOR_SEAT_SEQ")
     private Integer floorSeatSeq;
 
-    @Column(name = "FLOOR_NO", nullable = false)
     private Integer floorNo;
 
-    @Column(name = "SEAT_NO", nullable = false)
     private Integer seatNo;
-    
-    // 默認構造函數
-    public Seatingchart() {
-    }
-    
-    @JsonCreator
-    public Seatingchart(@JsonProperty("floorSeatSeq") Integer floorSeatSeq,
-                        @JsonProperty("floorNo") Integer floorNo,
-                        @JsonProperty("seatNo") Integer seatNo) {
-        this.floorSeatSeq = floorSeatSeq;
-        this.floorNo = floorNo;
-        this.seatNo = seatNo;
-    }
     
     // Getters and Setters
     public Integer getFloorSeatSeq() {
