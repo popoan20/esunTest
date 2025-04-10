@@ -4,7 +4,6 @@
 <ul>
     <li><strong>資料庫：</strong>MariaDB Server 11.4.2</li>
     <li><strong>Java：</strong>Java 17</li>
-    <li><strong>JDK：</strong>JDK 1.8</li>
     <li><strong>框架：</strong>Spring Boot 3.3.1</li>
 </ul>
 
